@@ -15,13 +15,17 @@ client = OpenAI(
   api_key=os.getenv('AI_API_KEY'),
 )
 
+# Carregar o prompt do arquivo JSON
+with open("prompts.json", "r", encoding="utf-8") as file:
+    prompt_content = file.read().strip()
+
 completion = client.chat.completions.create(
   extra_body={},
   model="deepseek/deepseek-chat-v3-0324:free",
   messages=[
     {
       "role": "user",
-      "content": "Apenas diga oi de volta"
+      "content": prompt_content
     }
   ]
 )
